@@ -9,8 +9,8 @@ services:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: password
     volumes:
-      - ./SampleCollections:/usr/local/sampleCollections
-    working_dir: /usr/local/sampleCollections
+      - ./db:/usr/local/db
+    working_dir: /usr/local/db
 
   mongo-express:
     image: mongo-express
@@ -28,7 +28,7 @@ services:
     environment:
       MONGO_USER: root
       MONGO_PASS: password
-      MONGO_DBNAME: SampleCollections
+      MONGO_DBNAME: db
       JWT_SECRET: secret
     command: 'npm start'
     ports:
