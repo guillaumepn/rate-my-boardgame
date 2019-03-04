@@ -33,9 +33,15 @@ services:
     command: 'npm start'
     ports:
       - 127.0.0.1:3000:3000
+    depends_on:
+      - mongo
+      - mongo-express
 
   client:
     build: './client'
     volumes:
       - './client:/home/node/app'
     working_dir: '/home/node/app'
+    depends_on:
+      - mongo
+      - mongo-express
