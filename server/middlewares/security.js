@@ -1,4 +1,4 @@
-const verifyJWTToken = require('../lib/auth').verifyJWTToken;
+const {verifyJWTToken} = require('../lib/auth');
 
 const verifyToken = (req, res, next) => {
     if (req.path === '/login_check') {
