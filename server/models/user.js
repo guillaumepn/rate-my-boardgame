@@ -3,10 +3,10 @@ const db = require('../lib/db');
 
 const Schema = mongoose.Schema;
 const userSchema = new Schema({
-    userName: String,
-    firstName: String,
-    lastName: String,
-    password: { type: String, minlength: 8},
+    username: String,
+    firstname: String,
+    lastname: String,
+    password: { type: String, minlength: 4},
     email: String,
     role: [String],
     owned_games: [{ type: Schema.Types.ObjectId, ref: 'Game' }],
@@ -15,3 +15,4 @@ const userSchema = new Schema({
 });
 
 module.exports = db.model("User", userSchema);
+

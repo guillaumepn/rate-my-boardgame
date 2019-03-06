@@ -7,14 +7,21 @@ const Game = require('../models/game');
 const Rating = require('../models/rating');
 
 
-router.post('/', (req, res) => {
-    const user = new User();
-    user.userName = 'jojo';
+router.get('/', (req, res) => {
+    let user = new User();
+    user.username = 'jojo';
+    user.password = 'test';
     user.save()
         .then(() => console.log("saved user"))
         .catch(error => console.log(error));
 
-    User.find().then(items => console.log('users', items)).catch(error => console.log(error));
+    user = new User();
+    user.username = 'toto';
+    user.password = 'test';
+    user.save()
+        .then(() => console.log("saved user"))
+        .catch(error => console.log(error));
+
 
     const game = new Game();
     game.title = 'Tricot';
@@ -33,7 +40,7 @@ router.post('/', (req, res) => {
 
     Rating.find().then(items => console.log('ratings', items)).catch(error => console.log(error));
 
-    res.status(200);
+    res.status(200).send();
 });
 
 module.exports = router;
