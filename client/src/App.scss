@@ -1,0 +1,15 @@
+@import "./shared";
+
+body {
+  background: $blue;
+}
+
+.App {
+  &__auth {
+    color: $dark;
+
+    > div {
+      background: $light-blue;
+    }
+  }
+}

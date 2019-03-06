@@ -15,7 +15,6 @@ class RegisterFormContainer extends Component {
 
     handleSubmit = (event) => {
         event.preventDefault();
-        console.log(this.state);
         fetch(`${process.env.REACT_APP_SERVER_URL}/users/register`, {
             method: 'POST',
             mode: 'cors',
@@ -32,7 +31,9 @@ class RegisterFormContainer extends Component {
     };
 
     render() {
-        return <RegisterForm onSubmit={this.handleSubmit} onChange={this.handleChange} />;
+        return (
+            <RegisterForm onSubmit={this.handleSubmit} onChange={this.handleChange}/>
+        );
     }
 }
 

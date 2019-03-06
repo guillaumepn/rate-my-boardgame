@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import './App.css';
+import './App.scss';
 import LoginFormContainer from "./containers/LoginFormContainer";
 import RegisterFormContainer from "./containers/RegisterFormContainer";
 
@@ -19,7 +19,7 @@ class App extends Component {
     render() {
         return (
             <div className="App">
-                <div style={{display: 'flex'}}>
+                <div className="App__auth" style={{display: 'flex'}}>
                     <RegisterFormContainer/>
                     <LoginFormContainer/>
                 </div>
