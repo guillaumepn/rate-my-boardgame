@@ -1,7 +1,9 @@
-const reducer = (state = { loggedUser: ''}, action) => {
+const reducer = (state = {loggedUser: ''}, action) => {
     switch (action.type) {
         case 'LOGGED_USER':
-            localStorage.setItem('token', action.payload.token);
+            if (action.payload.token) {
+                localStorage.setItem('token', action.payload.token);
+            }
 
             return {
                 ...state,
@@ -14,7 +16,8 @@ const reducer = (state = { loggedUser: ''}, action) => {
                 loggedUser: ''
             };
 
-        default: return state;
+        default:
+            return state;
     }
 }
 

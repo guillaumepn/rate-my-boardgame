@@ -5,7 +5,7 @@ export const logUser = (token) => {
             token
         }
     }
-}
+};
 
 export const login = (user, dispatch) => {
     fetch(`${process.env.REACT_APP_SERVER_URL}/login_check`, {
@@ -24,10 +24,10 @@ export const login = (user, dispatch) => {
         type: 'IS_LOGGING',
         payload: {}
     }
-}
+};
 
 export const logout = () => {
     return {
         type: 'LOGOUT'
     }
-}
+};
