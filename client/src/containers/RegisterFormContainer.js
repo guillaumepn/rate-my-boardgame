@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import LoginForm from "../components/LoginForm";
+import RegisterForm from "../components/RegisterForm";
 
-class LoginFormContainer extends Component {
+class RegisterFormContainer extends Component {
     state = {
         username: '',
         password: '',
@@ -16,7 +16,7 @@ class LoginFormContainer extends Component {
     handleSubmit = (event) => {
         event.preventDefault();
         console.log(this.state);
-        fetch(`${process.env.REACT_APP_SERVER_URL}/login_check`, {
+        fetch(`${process.env.REACT_APP_SERVER_URL}/users/register`, {
             method: 'POST',
             mode: 'cors',
             body: JSON.stringify(this.state),
@@ -25,13 +25,15 @@ class LoginFormContainer extends Component {
             },
         })
             .then(response => response.json())
-            .then(data => localStorage.setItem('token', data.token))
+            .then(user => {
+                console.log(user);
+            })
             .catch(error => console.log(error));
     };
 
     render() {
-        return <LoginForm onSubmit={this.handleSubmit} onChange={this.handleChange} />;
+        return <RegisterForm onSubmit={this.handleSubmit} onChange={this.handleChange} />;
     }
 }
 
-export default LoginFormContainer;
+export default RegisterFormContainer;

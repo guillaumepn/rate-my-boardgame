@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import './App.css';
 import LoginFormContainer from "./containers/LoginFormContainer";
+import RegisterFormContainer from "./containers/RegisterFormContainer";
 
 class App extends Component {
 
@@ -13,12 +14,15 @@ class App extends Component {
     handleToggle = () => {
         const newTheme = this.state.theme === 'dark' ? 'light' : 'dark';
         this.setState({theme: newTheme});
-    }
+    };
 
     render() {
         return (
             <div className="App">
-                <LoginFormContainer/>
+                <div style={{display: 'flex'}}>
+                    <RegisterFormContainer/>
+                    <LoginFormContainer/>
+                </div>
             </div>
         );
     }
