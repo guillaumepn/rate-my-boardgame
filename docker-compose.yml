@@ -9,19 +9,23 @@ services:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: password
     volumes:
-      - ./db:/usr/local/db
-    working_dir: /usr/local/db
+      - ./db:/data/db
+    working_dir: /data/db
 
   mongo-express:
     image: mongo-express
+    restart: on-failure
     ports:
       - 127.0.0.1:8088:8081
     environment:
       ME_CONFIG_MONGODB_ADMINUSERNAME: root
       ME_CONFIG_MONGODB_ADMINPASSWORD: password
+    depends_on:
+      - mongo
 
   server:
     build: './server'
+    restart: on-failure
     volumes:
       - './server:/home/node/app'
     working_dir: '/home/node/app'
@@ -39,9 +43,13 @@ services:
 
   client:
     build: './client'
+    restart: on-failure
     volumes:
       - './client:/home/node/app'
     working_dir: '/home/node/app'
+    command: 'npm start'
+    ports:
+      - 127.0.0.1:4000:3000
     depends_on:
       - mongo
       - mongo-express
