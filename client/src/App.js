@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
-import './App.css';
+import './App.scss';
 import LoginFormContainer from "./containers/LoginFormContainer";
 import RegisterFormContainer from "./containers/RegisterFormContainer";
+import jwt from "jsonwebtoken";
 
 class App extends Component {
 
@@ -17,12 +18,22 @@ class App extends Component {
     };
 
     render() {
+        const userData = jwt.decode(localStorage.getItem('token'));
+        const {username} = userData;
+
         return (
             <div className="App">
-                <div style={{display: 'flex'}}>
-                    <RegisterFormContainer/>
-                    <LoginFormContainer/>
-                </div>
+                { localStorage.getItem('token') === null
+                    ? <div className="App__auth" style={{display: 'flex'}}>
+                        <RegisterFormContainer/>
+                        <LoginFormContainer/>
+                    </div>
+                    : <div>
+                        Bonjour {username}
+                    </div>
+                }
+                {  }
+
             </div>
         );
     }

@@ -26,16 +26,17 @@ class RegisterFormContainer extends Component {
             },
         })
             .then(response => response.json())
-            .then(user => {
-                console.log(user);
-                if (user) {
+            .then(response => {
+                console.log(response);
+                if (response.error) {
+                    this.setState({flashMessage: "Ce username est déjà utilisé"});
+                }
+                else {
                     this.setState({flashMessage: "Votre compte a bien été enregistré"});
                 }
             })
             .catch(error => {
-                console.log(error)
-                this.setState({flashMessage: "Ce username est déjà utilisé"});
-                console.log(this.state);
+                console.log(error);
             });
     };
 
