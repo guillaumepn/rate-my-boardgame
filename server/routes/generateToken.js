@@ -9,6 +9,7 @@ const router = express.Router();
 
 router.post('/', (req, res) => {
     const token = createToken(req.body);
+    console.log(token);
     res.redirect('/');
 });
 
