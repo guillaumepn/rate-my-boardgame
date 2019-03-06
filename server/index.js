@@ -1,13 +1,14 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 
 const verifyToken = require('./middlewares/security');
 
 const app = express();
 
 app.use(verifyToken);
-app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
+app.use(cors());
 
 const userRouter = require('./routes/user');
 const gameRouter = require('./routes/game');

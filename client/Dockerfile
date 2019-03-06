@@ -1,3 +1,5 @@
 FROM node:10-alpine
 
-EXPOSE 4000
+RUN npm install -g create-react-app
+
+EXPOSE 3000

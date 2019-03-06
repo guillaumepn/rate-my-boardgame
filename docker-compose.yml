@@ -47,7 +47,7 @@ services:
     volumes:
       - './client:/home/node/app'
     working_dir: '/home/node/app'
-    command: 'npm start'
+    command: 'yarn start'
     ports:
       - 127.0.0.1:4000:3000
     depends_on:
