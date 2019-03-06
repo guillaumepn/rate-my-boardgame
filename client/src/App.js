@@ -3,6 +3,8 @@ import './App.scss';
 import LoginFormContainer from "./containers/LoginFormContainer";
 import RegisterFormContainer from "./containers/RegisterFormContainer";
 import jwt from "jsonwebtoken";
+import GameListingContainer from "./containers/GameListingContainer";
+import SecurityHeader from "./containers/SecurityHeader";
 
 class App extends Component {
 
@@ -19,7 +21,7 @@ class App extends Component {
 
     render() {
         const userData = jwt.decode(localStorage.getItem('token'));
-        const {username} = userData;
+        const {username} = userData ? userData : '';
 
         return (
             <div className="App">
@@ -36,6 +38,8 @@ class App extends Component {
                         </div>
                     )
                 }
+
+                <GameListingContainer/>
             </div>
         );
     }

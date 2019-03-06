@@ -1,5 +1,8 @@
 import React, {Component} from 'react';
+import {connect} from "react-redux";
+
 import LoginForm from "../components/LoginForm";
+import {login} from "../redux/actions/security";
 
 class LoginFormContainer extends Component {
     state = {
@@ -15,18 +18,7 @@ class LoginFormContainer extends Component {
 
     handleSubmit = (event) => {
         event.preventDefault();
-        console.log(this.state);
-        fetch(`${process.env.REACT_APP_SERVER_URL}/login_check`, {
-            method: 'POST',
-            mode: 'cors',
-            body: JSON.stringify(this.state),
-            headers: {
-                'Content-Type': 'application/json'
-            },
-        })
-            .then(response => response.json())
-            .then(data => localStorage.setItem('token', data.token))
-            .catch(error => console.log(error));
+        this.props.login(this.state);
     };
 
     render() {
@@ -34,4 +26,16 @@ class LoginFormContainer extends Component {
     }
 }
 
-export default LoginFormContainer;
+const mapStateToProps = (state) => {
+    return {
+        token: state.security.loggedUser
+    }
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        login: (user) => dispatch(login(user, dispatch))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginFormContainer);
