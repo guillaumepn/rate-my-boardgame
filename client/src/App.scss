@@ -1,11 +1,8 @@
 @import "./shared";
 
-body {
-  background: $blue;
-}
-
 .App {
   &__auth {
+    background: $blue;
     color: $dark;
 
     > div {

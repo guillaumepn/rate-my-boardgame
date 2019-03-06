@@ -9,7 +9,7 @@ class App extends Component {
     constructor(props) {
         super(props);
 
-        this.state = { theme: 'dark' };
+        this.state = {theme: 'dark'};
     }
 
     handleToggle = () => {
@@ -23,17 +23,19 @@ class App extends Component {
 
         return (
             <div className="App">
-                { localStorage.getItem('token') === null
-                    ? <div className="App__auth" style={{display: 'flex'}}>
-                        <RegisterFormContainer/>
-                        <LoginFormContainer/>
-                    </div>
-                    : <div>
-                        Bonjour {username}
-                    </div>
+                {localStorage.getItem('token') === null
+                    ? (
+                        <div className="App__auth" style={{display: 'flex'}}>
+                            <RegisterFormContainer/>
+                            <LoginFormContainer/>
+                        </div>
+                    )
+                    : (
+                        <div>
+                            Bonjour {username}
+                        </div>
+                    )
                 }
-                {  }
-
             </div>
         );
     }
