@@ -1,10 +1,11 @@
 const express = require("express");
 
+const verifyToken = require('../middlewares/security');
 const User = require('../models/user');
 
 const router = express.Router();
 
-router.get('/', (req, res) => {
+router.get('/', verifyToken, (req, res) => {
     console.log('route users');
     User.find(req.query)
         .then(data => res.status(200).send(data));
@@ -31,8 +32,6 @@ router.post('/register', (req, res) => {
             }
             res.send(JSON.stringify(user));
         });
-
-    // res.redirect('/');
 });
 
 module.exports = router;
