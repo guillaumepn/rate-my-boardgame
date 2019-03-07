@@ -25,7 +25,7 @@ class RegisterFormContainer extends Component {
     render() {
         return (
             <div>
-                <p>{ this.state.flashMessage }</p>
+                <p>{ this.props.flashMessage }</p>
                 <RegisterForm onSubmit={this.handleSubmit} onChange={this.handleChange}/>
             </div>
         );
@@ -41,7 +41,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        register: (user) => dispatch(register(user))
+        register: (user) => dispatch(register(user, dispatch))
     }
 };
 

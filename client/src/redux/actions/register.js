@@ -1,4 +1,11 @@
-export const register = (user) => {
+export const registered = (data) => {
+    return {
+        type: 'REGISTERED',
+        payload: data
+    }
+};
+
+export const register = (user, dispatch) => {
     let registerPayload = {};
 
     fetch(`${process.env.REACT_APP_SERVER_URL}/users/register`, {
@@ -11,14 +18,16 @@ export const register = (user) => {
     })
         .then(response => response.json())
         .then(response => {
-            console.log(response);
+            let data = {};
+
             if (response.error) {
-                registerPayload.flashMessage = "Cet identifiant est déjà utilisé";
+                data.flashMessage = "Cet identifiant est déjà utilisé";
             }
             else {
-                registerPayload.flashMessage = "Votre compte a bien été enregistré";
-                registerPayload.user = response;
+                data.flashMessage = "Votre compte a bien été enregistré";
+                data.user = response;
             }
+            dispatch(registered(data));
         })
         .catch(error => {
             console.log(error);
@@ -27,6 +36,6 @@ export const register = (user) => {
 
     return {
         type: 'REGISTER',
-        payload: registerPayload
+        payload: {}
     }
 };

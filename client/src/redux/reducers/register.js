@@ -1,6 +1,6 @@
 const reducer = (state = { flashMessage: '', user: {}}, action) => {
     switch (action.type) {
-        case 'REGISTER':
+        case 'REGISTERED':
             return {
                 ...state,
                 flashMessage: action.payload.flashMessage,

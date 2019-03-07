@@ -4,20 +4,9 @@ import LoginFormContainer from "./containers/LoginFormContainer";
 import RegisterFormContainer from "./containers/RegisterFormContainer";
 import jwt from "jsonwebtoken";
 import GameListingContainer from "./containers/GameListingContainer";
-import SecurityHeader from "./containers/SecurityHeader";
+import {connect} from "react-redux";
 
 class App extends Component {
-
-    constructor(props) {
-        super(props);
-
-        this.state = {theme: 'dark'};
-    }
-
-    handleToggle = () => {
-        const newTheme = this.state.theme === 'dark' ? 'light' : 'dark';
-        this.setState({theme: newTheme});
-    };
 
     render() {
         const userData = jwt.decode(localStorage.getItem('token'));
@@ -45,4 +34,11 @@ class App extends Component {
     }
 }
 
-export default App;
+const mapStateToProps = (state) => {
+    return {
+        loggedUser: state.security.loggedUser,
+    }
+};
+
+
+export default connect(mapStateToProps)(App);
