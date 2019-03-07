@@ -3,6 +3,7 @@ import './App.scss';
 import LoginFormContainer from "./containers/LoginFormContainer";
 import RegisterFormContainer from "./containers/RegisterFormContainer";
 import jwt from "jsonwebtoken";
+import CreateGameFormContainer from "./containers/CreateGameFormContainer";
 import GameListingContainer from "./containers/GameListingContainer";
 import {connect} from "react-redux";
 
@@ -11,6 +12,7 @@ class App extends Component {
     render() {
         const userData = jwt.decode(localStorage.getItem('token'));
         const {username} = userData ? userData : '';
+        console.log(userData);
 
         return (
             <div className="App">
@@ -24,6 +26,7 @@ class App extends Component {
                     : (
                         <div>
                             Bonjour {username}
+                            <CreateGameFormContainer/>
                         </div>
                     )
                 }

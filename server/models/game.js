@@ -12,7 +12,7 @@ const gameSchema = new Schema({
     editor: String,
     publisher: String,
     minPlayers: {type: Number, min: 1},
-    maxPlayers: {type: Number, min: 1, validate: () => this.maxPlayers > this.minPlayers },
+    maxPlayers: {type: Number, min: 1},
     ageRange: String,
     theme: [String],
     estimatedDuration: {type: Number, min: 0, max: 2000},
