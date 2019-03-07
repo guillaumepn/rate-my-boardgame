@@ -14,24 +14,32 @@ router.get('/', verifyToken, (req, res) => {
 
 router.post('/register', (req, res) => {
     console.log('register');
-    User.findOne({username: req.body.username})
-        .then(user => {
-            console.log(user);
+    if (req.body.username && req.body.password) {
+        User.findOne({username: req.body.username})
+            .then(user => {
+                console.log(user);
 
-            if (user) {
-                console.log('User already exists');
-                res.status(400).send({
-                    error: 'User already exists'
-                });
-            } else {
-                const newUser = new User(req.body);
-                newUser.save()
-                    .then(() => console.log("registered user"))
-                    .catch(error => console.log(error));
-                res.status(200).send(newUser);
-            }
-            res.send(JSON.stringify(user));
-        });
+                if (user) {
+                    console.log('User already exists');
+                    res.status(400).send({
+                        error: 'User already exists',
+                        type: 'already-exists'
+                    });
+                } else {
+                    const newUser = new User(req.body);
+                    newUser.save()
+                        .then(() => console.log("registered user"))
+                        .catch(error => console.log(error));
+                    res.status(200).send(newUser);
+                }
+                res.send(JSON.stringify(user));
+            });
+    } else {
+        res.status(400).send({
+            error: 'Invalid username/password',
+            type: 'empty-fields'
+        })
+    }
 });
 
 module.exports = router;

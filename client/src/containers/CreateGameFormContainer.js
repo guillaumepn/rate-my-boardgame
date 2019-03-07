@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import CreateGameForm from "../components/CreateGameForm";
 import jwt from "jsonwebtoken";
+import {connect} from "react-redux";
 
 class CreateGameFormContainer extends Component {
     state = {
@@ -44,6 +45,5 @@ class CreateGameFormContainer extends Component {
     }
 }
 
-//export default connect(mapStateToProps, mapDispatchToProps)(CreateGameFormContainer);
 
-export default CreateGameFormContainer;
+export default connect()(CreateGameFormContainer);

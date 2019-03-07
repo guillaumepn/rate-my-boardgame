@@ -6,8 +6,6 @@ export const registered = (data) => {
 };
 
 export const register = (user, dispatch) => {
-    let registerPayload = {};
-
     fetch(`${process.env.REACT_APP_SERVER_URL}/users/register`, {
         method: 'POST',
         mode: 'cors',
@@ -21,9 +19,11 @@ export const register = (user, dispatch) => {
             let data = {};
 
             if (response.error) {
-                data.flashMessage = "Cet identifiant est déjà utilisé";
-            }
-            else {
+                if (response.type === 'already-exists')
+                    data.flashMessage = "Cet identifiant est déjà pris";
+                else if (response.type === 'empty-fields')
+                    data.flashMessage = "Vous devez entrer un identifiant et mot de passe";
+            } else {
                 data.flashMessage = "Votre compte a bien été enregistré";
                 data.user = response;
             }

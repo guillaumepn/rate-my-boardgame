@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import RegisterForm from "../components/RegisterForm";
 import {connect} from "react-redux";
 import {register} from "../redux/actions/register";
+import {Card, Message} from "semantic-ui-react";
 
 class RegisterFormContainer extends Component {
     state = {
@@ -18,16 +19,33 @@ class RegisterFormContainer extends Component {
 
     handleSubmit = (event) => {
         event.preventDefault();
-        console.log(this.state);
+        console.log(this.props);
         this.props.register({username: this.state.username, password: this.state.password});
     };
 
     render() {
         return (
-            <div>
-                <p>{ this.props.flashMessage }</p>
-                <RegisterForm onSubmit={this.handleSubmit} onChange={this.handleChange}/>
-            </div>
+            <Card>
+                <Card.Content>
+                    {
+                        this.props.flashMessage &&
+                        (this.props.user ?
+                                <Message
+                                    success
+                                    header="Bravo !"
+                                    content={this.props.flashMessage}
+                                />
+                                :
+                                <Message
+                                    error
+                                    header="Erreur"
+                                    content={this.props.flashMessage}
+                                />
+                        )
+                    }
+                    <RegisterForm onSubmit={this.handleSubmit} onChange={this.handleChange}/>
+                </Card.Content>
+            </Card>
         );
     }
 }

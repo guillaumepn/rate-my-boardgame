@@ -3,6 +3,7 @@ import {connect} from "react-redux";
 
 import LoginForm from "../components/LoginForm";
 import {login} from "../redux/actions/security";
+import {Card} from "semantic-ui-react";
 
 class LoginFormContainer extends Component {
     state = {
@@ -22,7 +23,14 @@ class LoginFormContainer extends Component {
     };
 
     render() {
-        return <LoginForm onSubmit={this.handleSubmit} onChange={this.handleChange} />;
+        return (
+            <Card>
+                <Card.Content>
+                    <div>{this.props.flashMessage}</div>
+                    <LoginForm onSubmit={this.handleSubmit} onChange={this.handleChange}/>
+                </Card.Content>
+            </Card>
+        );
     }
 }
 

@@ -12,7 +12,14 @@ router.get('/', (req, res) => {
     console.log('route games', req.query);
     Game.find(req.query)
         .then(data => {
-            console.log('data', data);
+            res.status(200).send(data);
+        })
+});
+
+router.get('/single/:id', (req, res) => {
+    Game.findOne({_id: req.params.id})
+        .then(data => {
+            console.log('from server', data)
             res.status(200).send(data);
         })
 });
@@ -35,7 +42,6 @@ router.get('/:publisher', (req, res) => {
 // Routes POST
 
 router.post('/', verifyToken, (req, res) => {
-    console.log(req.body);
     const game = new Game(req.body);
     game.save();
     res.send(game);

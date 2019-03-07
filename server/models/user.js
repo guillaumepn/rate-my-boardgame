@@ -3,10 +3,10 @@ const db = require('../lib/db');
 
 const Schema = mongoose.Schema;
 const userSchema = new Schema({
-    username: String,
+    username: { type: String, required: true },
     firstname: String,
     lastname: String,
-    password: { type: String, minlength: 4},
+    password: { type: String, required: true, minlength: 4},
     email: String,
     role: [String],
     owned_games: [{ type: Schema.Types.ObjectId, ref: 'Game' }],

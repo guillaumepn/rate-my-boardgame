@@ -1,23 +1,24 @@
 import React, {Component} from 'react';
+import {Button, Form} from "semantic-ui-react";
 
 class RegisterForm extends Component {
     render() {
         return (
             <div>
-                <h2>Register</h2>
-                <form onSubmit={this.props.onSubmit}>
-                    <div>
-                        <label htmlFor="username__register">Username</label>
+                <h2>Inscription</h2>
+                <Form onSubmit={this.props.onSubmit}>
+                    <Form.Field required>
+                        <label htmlFor="username__register">Identifiant</label>
                         <input type="text" id="username__register"
                                onChange={(event) => this.props.onChange(event.currentTarget.value, 'username')}/>
-                    </div>
-                    <div>
-                        <label htmlFor="password__register">Password</label>
+                    </Form.Field>
+                    <Form.Field required>
+                        <label htmlFor="password__register">Mot de passe</label>
                         <input type="password" id="password__register"
                                onChange={(event) => this.props.onChange(event.currentTarget.value, 'password')}/>
-                    </div>
-                    <button>Submit</button>
-                </form>
+                    </Form.Field>
+                    <Button type="submit">S'inscrire</Button>
+                </Form>
             </div>
         );
     }
