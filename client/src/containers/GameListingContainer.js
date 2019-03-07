@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+import {gameListing} from "../redux/actions/game-listing";
+import {connect} from "react-redux";
 
 class GameListingContainer extends Component {
 
@@ -11,14 +13,7 @@ class GameListingContainer extends Component {
     }
 
     componentDidMount() {
-        fetch(`${process.env.REACT_APP_SERVER_URL}/games`)
-            .then(response => response.json())
-            .then(data => {
-                console.log(data)
-                this.setState({games: data})
-                console.log(this.state)
-            })
-
+        this.props.gameListing(this.state);
     }
 
     render() {
@@ -26,8 +21,8 @@ class GameListingContainer extends Component {
             <div>
                 <h2>Liste des jeux</h2>
                 {
-                    this.state.games.length > 0 ?
-                        this.state.games.map(game => (
+                    this.props.games.length > 0 ?
+                        this.props.games.map(game => (
                             <div key={game._id}>{game.title} - {game.year}</div>
                         ))
                         :
@@ -38,4 +33,16 @@ class GameListingContainer extends Component {
     }
 }
 
-export default GameListingContainer;
+const mapStateToProps = (state) => {
+    return {
+        games: state.gameListing.games,
+    }
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        gameListing: () => dispatch(gameListing(dispatch))
+    }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(GameListingContainer);
