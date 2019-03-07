@@ -6,8 +6,6 @@ export const registered = (data) => {
 };
 
 export const register = (user, dispatch) => {
-    let registerPayload = {};
-
     fetch(`${process.env.REACT_APP_SERVER_URL}/users/register`, {
         method: 'POST',
         mode: 'cors',

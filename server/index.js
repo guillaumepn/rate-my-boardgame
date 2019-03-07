@@ -2,8 +2,6 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
-// const verifyToken = require('./middlewares/security');
-
 const app = express();
 
 app.use(bodyParser.json());

@@ -1,21 +1,22 @@
 import React, {Component} from 'react';
+import {Button, Form} from "semantic-ui-react";
 
 class LoginForm extends Component {
     render() {
         return (
             <div>
-                <h2>Login</h2>
-                <form onSubmit={this.props.onSubmit}>
-                    <div>
-                        <label htmlFor="username">Username</label>
+                <h2>Connexion</h2>
+                <Form onSubmit={this.props.onSubmit}>
+                    <Form.Field>
+                        <label htmlFor="username">Identifiant</label>
                         <input type="text" id="username" onChange={(event) => this.props.onChange(event.currentTarget.value, 'username')}/>
-                    </div>
-                    <div>
-                        <label htmlFor="password">Password</label>
+                    </Form.Field>
+                    <Form.Field>
+                        <label htmlFor="password">Mot de passe</label>
                         <input type="password" id="password" onChange={(event) => this.props.onChange(event.currentTarget.value, 'password')}/>
-                    </div>
-                    <button>Submit</button>
-                </form>
+                    </Form.Field>
+                    <Button type="submit">Se connecter</Button>
+                </Form>
             </div>
         );
     }

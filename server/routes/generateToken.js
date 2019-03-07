@@ -11,8 +11,7 @@ router.post('/', (req, res) => {
         User.findOne(req.body)
             .then(user => {
                 if (user) {
-                    const token = createToken(req.body);
-                    console.log(token);
+                    const token = createToken(user);
                     res.send({token});
                 } else {
                     res.status(400).send({
