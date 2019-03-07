@@ -35,7 +35,7 @@ router.get('/:publisher', (req, res) => {
 router.post('/', (req, res) => {
     console.log(req.body);
     const game = new Game(req.body);
-    game.save();
+    // game.save();
     res.send(game);
 });
 

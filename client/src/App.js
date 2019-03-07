@@ -3,6 +3,7 @@ import './App.scss';
 import LoginFormContainer from "./containers/LoginFormContainer";
 import RegisterFormContainer from "./containers/RegisterFormContainer";
 import jwt from "jsonwebtoken";
+import CreateGameFormContainer from "./containers/CreateGameFormContainer";
 
 class App extends Component {
 
@@ -33,6 +34,8 @@ class App extends Component {
                     : (
                         <div>
                             Bonjour {username}
+                            <CreateGameFormContainer/>
+                            <LoginFormContainer/>
                         </div>
                     )
                 }
