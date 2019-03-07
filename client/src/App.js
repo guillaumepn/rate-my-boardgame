@@ -10,7 +10,7 @@ import './App.scss';
 import HomePage from "./containers/HomePage";
 import GamePage from "./containers/GamePage";
 import {gameListing} from "./redux/actions/game-listing";
-import {logout} from "./redux/actions/security";
+import {logout, logUser} from "./redux/actions/security";
 
 class App extends Component {
     constructor(props) {
@@ -21,6 +21,12 @@ class App extends Component {
 
     handleLogout = () => {
         this.props.dispatch(logout())
+    };
+
+    componentDidMount() {
+        if (localStorage.getItem('token')) {
+            this.props.dispatch(logUser(localStorage.getItem('token')));
+        }
     }
 
     render() {

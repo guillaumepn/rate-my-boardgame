@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import CreateGameForm from "../components/CreateGameForm";
 import jwt from "jsonwebtoken";
 import {connect} from "react-redux";
+import {addGame} from "../redux/actions/game-listing";
 
 class CreateGameFormContainer extends Component {
     state = {
@@ -26,24 +27,24 @@ class CreateGameFormContainer extends Component {
 
     handleSubmit = (event) => {
         event.preventDefault();
-         console.log(this.state);
-        fetch(`${process.env.REACT_APP_SERVER_URL}/games`, {
-            method: 'POST',
-            mode: 'cors',
-            body: JSON.stringify(this.state),
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
-        })
-            .then(response => response.json())
-            .catch(error => console.log(error));
+        this.props.addGame(this.state);
     };
 
     render() {
-        return <CreateGameForm onSubmit={this.handleSubmit} onChange={this.handleChange} />;
+        return <CreateGameForm onSubmit={this.handleSubmit} onChange={this.handleChange}/>;
     }
 }
 
+const mapStateToProps = (state) => {
+    return {
+        games: state.gameListing.games,
+    }
+};
 
-export default connect()(CreateGameFormContainer);
+const mapDispatchToProps = (dispatch) => {
+    return {
+        addGame: (data) => dispatch(addGame(data, dispatch))
+    }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(CreateGameFormContainer);

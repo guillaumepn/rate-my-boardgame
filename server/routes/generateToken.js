@@ -27,6 +27,21 @@ router.post('/', (req, res) => {
     }
 });
 
+router.post('/refresh', (req, res) => {
+    User.findOne(req.body)
+        .then(user => {
+            if (user) {
+                const token = createToken(user);
+                res.send({token});
+            } else {
+                res.status(400).send({
+                    error: 'User not found or invalid credentials'
+                })
+            }
+        })
+        .catch((err) => console.log(err));
+})
+
 
 module.exports = router;
 

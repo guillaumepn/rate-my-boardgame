@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from "react-redux";
+import {Header} from "semantic-ui-react";
 
 class GamePage extends Component {
 
@@ -8,7 +9,13 @@ class GamePage extends Component {
 
         return game ? (
             <div>
-                {game.title}
+                <Header as="h2">
+                    {game.title}
+                    <Header.Subheader>
+                        {game.description}
+                    </Header.Subheader>
+                </Header>
+
             </div>
         ) : (
             <div>Aucun jeu trouvé</div>

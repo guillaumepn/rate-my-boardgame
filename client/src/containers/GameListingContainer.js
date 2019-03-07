@@ -17,15 +17,32 @@ class GameListingContainer extends Component {
         return (
             <div>
                 <h2>Liste des jeux</h2>
-                <List selection verticalAlign="middle">
+                <List
+                    selection
+                    verticalAlign="middle"
+                    style={{
+                        margin: '1em 0'
+                    }}
+                >
                     {
                         this.props.games.length > 0 ?
                             this.props.games.map(game => (
-                                <List.Item key={game._id} as={Link} to={`/game/${game._id}`}>
-                                    <List.Content>
+                                <List.Item
+                                    key={game._id}
+                                    as={Link}
+                                    to={`/game/${game._id}`}
+                                    style={{
+                                        padding: '1em'
+                                    }}
+                                >
+                                    <List.Content floated="left">
                                         <List.Header>{game.title}</List.Header>
-                                        <List.Description>{game.title}</List.Description>
+                                        <List.Description>{game.description}</List.Description>
                                         {game.year}
+                                    </List.Content>
+                                    <List.Content style={{textAlign: 'right'}} floated="right">
+                                        {game.editor && <List.Header>Créé par {game.editor}</List.Header>}
+                                        {game.publisher && <List.Description>Publié par {game.publisher}</List.Description>}
                                     </List.Content>
                                 </List.Item>
                             ))
