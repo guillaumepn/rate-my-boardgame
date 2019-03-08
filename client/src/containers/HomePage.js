@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react';
 import {connect} from "react-redux";
 
 import GameListingContainer from "./GameListingContainer";
@@ -8,24 +8,33 @@ import {Card} from "semantic-ui-react";
 import CreateGameFormContainer from "./CreateGameFormContainer";
 
 
-const HomePage = () => {
-    return (
-        <div>
-            {localStorage.getItem('token') === null && (
-                <Card.Group centered>
-                    <RegisterFormContainer/>
-                    <LoginFormContainer/>
-                </Card.Group>
-            )}
+class HomePage extends Component {
 
-            <GameListingContainer/>
+    render() {
+        return (
+            <div>
+                {localStorage.getItem('token') === null && (
+                    <Card.Group centered>
+                        <RegisterFormContainer/>
+                        <LoginFormContainer/>
+                    </Card.Group>
+                )}
 
-            {
-                localStorage.getItem('token') !== null &&
-                <CreateGameFormContainer/>
-            }
-        </div>
-    );
+                <GameListingContainer/>
+
+                {
+                    localStorage.getItem('token') !== null &&
+                    <CreateGameFormContainer/>
+                }
+            </div>
+        );
+    }
+}
+
+const mapStateToProps = (state) => {
+    return {
+        loggedUser: state.security.loggedUser,
+    }
 };
 
-export default connect()(HomePage);
+export default connect(mapStateToProps)(HomePage);

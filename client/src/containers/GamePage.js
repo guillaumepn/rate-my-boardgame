@@ -4,34 +4,22 @@ import {List} from "semantic-ui-react/dist/commonjs/elements/List";
 import {Rating} from "semantic-ui-react";
 import GameListingContainer from "./HomePage";
 import RatingGameContainer from "./RatingGameContainer";
+import {Header} from "semantic-ui-react";
 
 class GamePage extends Component {
-    state = {
-        rating: '',
-    };
-
-    handleRating = (value, ownProps) => {
-        this.setState({rating: value});
-        console.log(this.state);
-        console.log(value);
-        fetch(`${process.env.REACT_APP_SERVER_URL}/game/${ownProps.match.params.id}`, {
-            method: 'PUT',
-            mode: 'cors',
-            body: JSON.stringify(this.state),
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
-        })
-            .then(response => response.json())
-            .catch(error => console.log(error));
-    }
 
     render() {
         const game = this.props.game;
 
         return game ? (
             <div>
+                <Header as="h2">
+                    {game.title}
+                    <Header.Subheader>
+                        {game.description}
+                    </Header.Subheader>
+                </Header>
+
                 {game.title}
 
                 <RatingGameContainer game={game}/>

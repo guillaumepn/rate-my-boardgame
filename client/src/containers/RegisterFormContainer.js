@@ -27,6 +27,7 @@ class RegisterFormContainer extends Component {
         return (
             <Card>
                 <Card.Content>
+                    <RegisterForm onSubmit={this.handleSubmit} onChange={this.handleChange}/>
                     {
                         this.props.flashMessage &&
                         (this.props.user ?
@@ -43,7 +44,6 @@ class RegisterFormContainer extends Component {
                                 />
                         )
                     }
-                    <RegisterForm onSubmit={this.handleSubmit} onChange={this.handleChange}/>
                 </Card.Content>
             </Card>
         );
