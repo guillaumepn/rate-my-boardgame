@@ -7,7 +7,8 @@ const reducer = (state = {loggedUser: ''}, action) => {
 
             return {
                 ...state,
-                loggedUser: action.payload.token
+                loggedUser: action.payload.token,
+                flashMessage: action.payload.flashMessage
             };
 
         case 'LOGOUT':

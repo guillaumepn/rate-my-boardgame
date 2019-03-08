@@ -1,9 +1,9 @@
-export const logUser = (token) => {
+import {registered} from "./register";
+
+export const logUser = (data) => {
     return {
         type: 'LOGGED_USER',
-        payload: {
-            token
-        }
+        payload: data
     }
 };
 
@@ -17,8 +17,24 @@ export const login = (user, dispatch) => {
         },
     })
         .then(response => response.json())
-        .then(data => dispatch(logUser(data.token)))
-        .catch(error => console.log(error));
+        .then(response => {
+            let data = {};
+
+            if (response.error) {
+                if (response.type === 'wrong-combinaison')
+                    data.flashMessage = "La combinaison identifiant/mot de passe est invalide";
+                else if (response.type === 'empty-fields')
+                    data.flashMessage = "Vous devez entrer un identifiant et mot de passe";
+            } else {
+                data.flashMessage = "Vous êtes bien déconnecté";
+                data.user = response;
+                data.token = response.token;
+            }
+            dispatch(logUser(data));
+        })
+        .catch(error => {
+            console.log(error);
+        });
 
     return {
         type: 'IS_LOGGING',
