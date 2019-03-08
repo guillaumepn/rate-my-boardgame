@@ -34,7 +34,6 @@ export const addGame = (data, dispatch) => {
     })
         .then(response => response.json())
         .then(data => {
-            console.log(data);
             const user = jwt.decode(localStorage.getItem('token'));
 
             if (user && data.error && data.details.name === "TokenExpiredError") {

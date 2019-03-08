@@ -18,7 +18,7 @@ const reducer = (state = {games: []}, action) => {
 
             return {
                 ...state,
-                games: games,
+                games: [...games],
             };
 
         default:

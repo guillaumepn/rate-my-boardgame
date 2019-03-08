@@ -19,7 +19,6 @@ class RegisterFormContainer extends Component {
 
     handleSubmit = (event) => {
         event.preventDefault();
-        console.log(this.props);
         this.props.register({username: this.state.username, password: this.state.password});
     };
 
