@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 
 import LoginForm from "../components/LoginForm";
 import {login} from "../redux/actions/security";
-import {Card} from "semantic-ui-react";
+import {Card, Message} from "semantic-ui-react";
 
 class LoginFormContainer extends Component {
     state = {
@@ -26,8 +26,23 @@ class LoginFormContainer extends Component {
         return (
             <Card>
                 <Card.Content>
-                    <div>{this.props.flashMessage}</div>
                     <LoginForm onSubmit={this.handleSubmit} onChange={this.handleChange}/>
+                    {
+                        this.props.flashMessage &&
+                        (this.props.user ?
+                                <Message
+                                    success
+                                    header="Bravo !"
+                                    content={this.props.flashMessage}
+                                />
+                                :
+                                <Message
+                                    error
+                                    header="Erreur"
+                                    content={this.props.flashMessage}
+                                />
+                        )
+                    }
                 </Card.Content>
             </Card>
         );
@@ -36,6 +51,7 @@ class LoginFormContainer extends Component {
 
 const mapStateToProps = (state) => {
     return {
+        flashMessage: state.security.flashMessage,
         token: state.security.loggedUser
     }
 };
