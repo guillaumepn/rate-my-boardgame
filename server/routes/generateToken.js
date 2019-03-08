@@ -15,14 +15,16 @@ router.post('/', (req, res) => {
                     res.send({token});
                 } else {
                     res.status(400).send({
-                        error: 'User not found or invalid credentials'
+                        error: 'User not found or invalid credentials',
+                        type: 'wrong-combinaison'
                     })
                 }
             })
             .catch((err) => console.log(err));
     } else {
         res.status(400).send({
-            error: 'Invalid username/password'
+            error: 'Invalid username/password',
+            type: 'empty-fields'
         })
     }
 });
@@ -35,7 +37,7 @@ router.post('/refresh', (req, res) => {
                 res.send({token});
             } else {
                 res.status(400).send({
-                    error: 'User not found or invalid credentials'
+                    error: 'User not found or invalid credentials',
                 })
             }
         })
