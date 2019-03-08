@@ -37,8 +37,7 @@ class GameListingContainer extends Component {
                                 >
                                     <List.Content floated="left">
                                         <List.Header>{game.title}</List.Header>
-                                        <List.Description>{game.description}</List.Description>
-                                        {game.year}
+                                        <List.Description>{game.year}</List.Description>
                                     </List.Content>
                                     <List.Content style={{textAlign: 'right'}} floated="right">
                                         {game.editor && <List.Header>Créé par {game.editor}</List.Header>}

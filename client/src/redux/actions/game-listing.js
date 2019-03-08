@@ -49,4 +49,56 @@ export const addGame = (data, dispatch) => {
         type: 'ADD_GAME',
         payload: {}
     }
-}
+};
+
+export const gameRated = (rating) => {
+    return {
+        type: 'GAME_RATED',
+        payload: {
+            rating
+        }
+    }
+};
+
+export const rateGame = (game, score, dispatch) => {
+    const data = {
+        game,
+        score
+    };
+
+    fetch(`${process.env.REACT_APP_SERVER_URL}/ratings`, {
+        method: 'POST',
+        mode: 'cors',
+        body: JSON.stringify(data),
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + localStorage.getItem('token')
+        },
+    })
+        .then(response => response.json())
+        .then(res => {
+            dispatch(gameRated(res))
+        })
+        .catch(error => console.log(error));
+
+    return {
+        type: 'RATE_GAME',
+        payload: {}
+    }
+};
+
+export const gotGameRatings = (ratings) => {
+    return {
+        type: 'GOT_GAME_RATINGS',
+        payload: {
+            ratings
+        }
+    }
+};
+
+export const getGameRatings = (game, dispatch) => {
+    return {
+        type: 'GET_GAME_RATINGS',
+        payload: {}
+    }
+};

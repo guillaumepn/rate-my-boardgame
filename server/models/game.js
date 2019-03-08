@@ -1,3 +1,5 @@
+const Rating = require("./rating");
+
 const mongoose = require('mongoose');
 const db = require('../lib/db');
 
@@ -17,7 +19,7 @@ const gameSchema = new Schema({
     theme: [String],
     estimatedDuration: {type: Number, min: 0, max: 2000},
     mechanics: [String],
-    ratings: [{ type: Schema.Types.ObjectId, ref: 'Rating' }],
+    ratings: [Rating.schema],
     averageScore: {type: Number, min: 0, max: 10},
     website: {type: String, minlength: 5, maxlength: 300},
     image: {type: String, minlength: 5, maxlength: 300},
