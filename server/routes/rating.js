@@ -33,17 +33,12 @@ router.post('/', verifyToken, (req, res) => {
             } else {
                 let oldRating = data;
                 oldRating.score = rating.score;
-                console.log('oldrating before', oldRating)
                 oldRating.save();
-                console.log('oldrating after', oldRating)
 
                 Game.findOne({_id: oldRating.game})
                     .then(game => {
-                        console.log('game before pull', game)
                         game.ratings.pull({_id: oldRating._id});
-                        console.log('game after pull', game)
                         game.ratings.push(oldRating);
-                        console.log('game after push', game)
                         game.save();
                     })
                     .catch(error => console.log(error));

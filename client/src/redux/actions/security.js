@@ -1,5 +1,3 @@
-import {registered} from "./register";
-
 export const logUser = (data) => {
     return {
         type: 'LOGGED_USER',
