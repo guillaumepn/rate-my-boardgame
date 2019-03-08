@@ -36,7 +36,7 @@ class App extends Component {
         return (
             <Container className="App">
                 <Menu secondary>
-                    <Menu.Item as={Link} to="/" name="home"/>
+                    <Menu.Item as={Link} to="/" name="Rate Your Board Game"/>
                     <Menu.Menu position="right">
                         {
                             username && (
