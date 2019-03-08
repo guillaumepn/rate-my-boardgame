@@ -1,5 +1,9 @@
 import React, {Component} from 'react';
 import {connect} from "react-redux";
+import {List} from "semantic-ui-react/dist/commonjs/elements/List";
+import {Rating} from "semantic-ui-react";
+import GameListingContainer from "./HomePage";
+import RatingGameContainer from "./RatingGameContainer";
 import {Header} from "semantic-ui-react";
 
 class GamePage extends Component {
@@ -16,6 +20,9 @@ class GamePage extends Component {
                     </Header.Subheader>
                 </Header>
 
+                {game.title}
+
+                <RatingGameContainer game={game}/>
             </div>
         ) : (
             <div>Aucun jeu trouvé</div>
