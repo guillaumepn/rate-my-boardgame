@@ -44,6 +44,6 @@ const mapDispatchToProps = (dispatch) => {
     return {
         login: (user) => dispatch(login(user, dispatch))
     }
-}
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginFormContainer);
