@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {connect} from "react-redux";
 import {List} from "semantic-ui-react";
 import {Link} from "react-router-dom";
+import { Rating } from 'semantic-ui-react';
 
 class GameListingContainer extends Component {
 
@@ -27,6 +28,7 @@ class GameListingContainer extends Component {
                                         <List.Description>{game.title}</List.Description>
                                         {game.year}
                                     </List.Content>
+                                    <Rating icon='star' defaultRating={0} maxRating={10} />
                                 </List.Item>
                             ))
                             :
