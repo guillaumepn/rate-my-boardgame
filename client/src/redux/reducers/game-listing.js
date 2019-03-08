@@ -6,9 +6,7 @@ const reducer = (state = {games: []}, action) => {
                 games: action.payload.games,
             };
         case 'GAME_RATED':
-            console.log('payload', action.payload)
             const games = state.games.map(game => {
-                console.log('single game', game)
                 if (action.payload.rating.game !== game._id) {
                     return game
                 } else {
@@ -17,7 +15,6 @@ const reducer = (state = {games: []}, action) => {
                 }
             });
 
-            console.log('new state', games);
 
             return {
                 ...state,

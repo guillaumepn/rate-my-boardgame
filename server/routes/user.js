@@ -1,11 +1,10 @@
 const express = require("express");
 
-const verifyToken = require('../middlewares/security');
 const User = require('../models/user');
 
 const router = express.Router();
 
-router.get('/', verifyToken, (req, res) => {
+router.get('/', (req, res) => {
     console.log('route users');
     User.find(req.query)
         .then(data => res.status(200).send(data));

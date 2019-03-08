@@ -11,6 +11,8 @@ import HomePage from "./containers/HomePage";
 import GamePage from "./containers/GamePage";
 import {gameListing} from "./redux/actions/game-listing";
 import {logout, logUser} from "./redux/actions/security";
+import UsersPage from "./containers/UsersPage";
+import UserPage from "./containers/UserPage";
 
 class App extends Component {
     constructor(props) {
@@ -38,11 +40,13 @@ class App extends Component {
                 <Menu secondary>
                     <Menu.Item as={Link} to="/" name="Rate Your Board Game"/>
                     <Menu.Menu position="right">
+                        <Menu.Item as={Link} to="/users" name="Utilisateurs"/>
+
                         {
                             username && (
                                 <>
-                                    <Menu.Item as={Button} onClick={this.handleLogout} name="Déconnexion" />
-                                    <Menu.Item name={`Bonjour ${username}`} />
+                                    <Menu.Item as={Button} onClick={this.handleLogout} name="Déconnexion"/>
+                                    <Menu.Item name={`Bonjour ${username}`}/>
                                 </>
                             )
                         }
@@ -51,6 +55,8 @@ class App extends Component {
 
                 <Route path="/" exact component={HomePage}/>
                 <Route path="/game/:id" component={GamePage}/>
+                <Route path="/users" exact component={UsersPage}/>
+                <Route path="/user/:id" component={UserPage}/>
             </Container>
         );
     }
